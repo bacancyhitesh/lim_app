@@ -1,0 +1,2 @@
+class ParsedContent < ApplicationRecord
+end
