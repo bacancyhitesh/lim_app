@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
+  apipie
   namespace :api do
     namespace :v1 do
       resources :parser, only: [] do
         collection do
-          post :fecher
-          get :list
+          post :fetcher
+          get :parsed_urls
         end
       end
     end

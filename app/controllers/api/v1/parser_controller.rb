@@ -2,7 +2,9 @@ class Api::V1::ParserController < ApplicationController
 	protect_from_forgery with: :null_session
   
   # Parsing content based on provided URL
-  def fecher
+  api :POST, '/v1/parser/fetcher', "Parse the URL"
+  param :url, String, "URL for parse the content", :required => true
+  def fetcher
   	begin
       validate_url = URI.parse(params[:url])
       if validate_url.scheme.nil? && !validate_url.include?('http')
@@ -34,9 +36,9 @@ class Api::V1::ParserController < ApplicationController
   			message: "Data parsed successfully.",
         content: ParsedContent.find_each(batch_size: 500).map { |data|  
           {
-            tagName: data.tag_type,
+            tag_name: data.tag_type,
             content: data.content,
-            url: data.url
+            parsed_from: data.url
           }
         }
 	  	}
@@ -49,7 +51,8 @@ class Api::V1::ParserController < ApplicationController
   end
 
   # Parsed Url's list
-  def list
+  api :GET, '/v1/parser/parsed_urls', "List of parsed URL's"
+  def parsed_urls
   	render :json => {
       status: :success,
   		parsed_urls: ParsedContent.distinct(:url).pluck(:url)

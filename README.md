@@ -5,25 +5,29 @@
 * Ruby 2.3.0
 * Rails 5.0.1
 
-Rules of the Road
-
-### Setup 
+### Setup the App
 
   1. Get the code.
 
     % git clone https://github.com/bacancyhitesh/lim_app.git
 
-  2. Setup your environment.
+  2. For Setup your environment go to the clone code directory and do bundle.
+    
+    % cd lim_app
+    % bundle install
 
-    % bin/setup
+  3. Setup database
+
+    % rake db:create
+    % rake db:migrate
 
   3. Start Rails Server
 
-    % bin/rails server
+    % rails server
     
-  4. Verify that the app is up and running.
-	open any restclient for API call
-  5. For parse the Url call below url with url parameter
-   		http://localhost:3000/api/v1/parser/fecher
-  6. Call below api for listing previously parsed url's
-    % http://localhost:3000/api/v1/parser/list
+  4. Verify that the app is up and running and for API documentation.
+    
+    % http://localhost:3000/api_doc
+
+  5. Use any rest client to test the API.
+    
